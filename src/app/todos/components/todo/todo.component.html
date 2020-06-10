@@ -1,0 +1,4 @@
+<mat-card [ngStyle]="{'border-color': todo.category.color}" mat-ripple (click)="todoClicked.emit(todo)">
+  <mat-card-title>{{ todo.title }}</mat-card-title>
+  <mat-card-subtitle>{{todo.category.name}}</mat-card-subtitle>
+</mat-card>
