@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "time-scheduler"
+  "defaultProject": "time-scheduler",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

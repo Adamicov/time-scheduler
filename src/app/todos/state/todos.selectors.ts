@@ -5,7 +5,4 @@ const selectorTodos = createFeatureSelector<fromTodos.TodosState>(
   fromTodos.FEATURE_KEY
 );
 
-export const selectTodosData = createSelector(
-  selectorTodos,
-  (state: fromTodos.TodosState): fromTodos.TodoEntities => state.entities
-);
+export const selectAllTodos = createSelector(selectorTodos, fromTodos.selectAll);

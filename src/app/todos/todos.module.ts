@@ -18,6 +18,8 @@ import * as fromTodos from './state/todos.reducers';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { EffectsModule} from '@ngrx/effects';
+import { TodosEffects } from './state/todos.effects';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
   ],
   imports: [
     StoreModule.forFeature(fromTodos.FEATURE_KEY, fromTodos.reducer),
+    EffectsModule.forFeature([TodosEffects]),
     TodosRoutingModule,
     MatCardModule,
     CommonModule,
