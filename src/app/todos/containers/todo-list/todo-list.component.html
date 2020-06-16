@@ -2,7 +2,13 @@
   <app-category-list></app-category-list>
   <div class="todos">
     <ng-container *ngIf="todos$ | async as todos">
-      <app-todo *ngFor="let todo of todos" [todo]="todo" (todoClicked)="todoClicked($event)"></app-todo>
+      <app-todo
+        *ngFor="let todo of todos"
+        [todo]="todo"
+        (todoClicked)="todoClicked($event)"
+        (markDone)="markTodoDone($event)"
+        (markCanceled)="markTodoCanceled($event)"
+        class="m-3"></app-todo>
     </ng-container>
     <button mat-button mat-raised-button color="primary" (click)="createTodo()">Add ToDo</button>
   </div>

@@ -6,8 +6,8 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Tag</mat-label>
-      <mat-select [(value)]="selectedCategory" formControlName="category">
-        <mat-option [value]="option.name" *ngFor="let option of defaultCategories">
+      <mat-select [(value)]="selectedCategory" [compareWith]="compareCategories" formControlName="category">
+        <mat-option [value]="option" *ngFor="let option of defaultCategories">
           <div class="category">
             <div class="category__color" [ngStyle]="{'background-color': option.color}"></div>
             <span class="mat-body-2">{{option.name}}</span>
@@ -28,6 +28,6 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-raised-button color="primary" class="mr-auto" (click)="submit()">{{submitText}}</button>
+  <button mat-button mat-raised-button color="primary" class="mr-auto" (click)="submit()">{{action}}</button>
   <button mat-button mat-raised-button color="accent" [mat-dialog-close]="true" class="ml-auto">Delete</button>
 </mat-dialog-actions>

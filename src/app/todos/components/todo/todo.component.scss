@@ -3,3 +3,21 @@
   border-right: 5px solid;
   cursor: pointer;
 }
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__icons {
+    color: salmon;
+    margin-right: 1rem;
+
+
+
+    :last-child {
+      margin-left: 1rem;
+    }
+  }
+
+}

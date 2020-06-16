@@ -9,6 +9,13 @@ export interface TodoDialogData {
   categories?: Category[] | undefined;
 }
 
+export const UPDATE = 'Update';
+export const SAVE = 'Save';
+
+export interface TodoDialogResponse {
+  todo: Todo;
+  action: string;
+}
 
 @Component({
   selector: 'app-todo-dialog',
@@ -16,13 +23,14 @@ export interface TodoDialogData {
   styleUrls: ['./todo-dialog.component.scss'],
 })
 export class TodoDialogComponent implements OnInit {
+  todo: Todo | undefined;
   todoForm: FormGroup;
-  selectedCategory: Category | undefined;
+  selectedCategory: Category | undefined = { name: 'Sport', color: '#f8d40b' };
   defaultCategories: Category[] = [
     { name: 'Work', color: '#6f3e19' },
     { name: 'Sport', color: '#f8d40b' },
   ];
-  submitText: string;
+  action: string;
 
   constructor(
     private fb: FormBuilder,
@@ -31,19 +39,32 @@ export class TodoDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.submitText = this.data.todo ? 'Update' : 'Save';
+    this.todo = this.data.todo;
+    this.action = this.todo ? UPDATE : SAVE;
     this.todoForm = this.fb.group({
       title: ['', Validators.required],
-      description: [''],
-      category: [Validators.required],
-      deadline: [Validators.required],
+      description: [],
+      category: ['', Validators.required],
+      deadline: ['', Validators.required],
     });
+    if (this.todo) {
+      this.todoForm.patchValue({ ...this.todo });
+      this.selectedCategory = this.todo.category;
+      console.log(this.selectedCategory);
+    }
   }
 
   submit(): void {
-    let todo: Todo = this.todoForm.value;
-    todo = {...todo, id: todo.title + '-' + todo.category}
-    console.log(todo);
-    this.dialogRef.close(todo);
+    if (this.todoForm.invalid) {
+      console.log(this.todoForm);
+      return;
+    }
+    const todo: Todo = { ...this.todo, ...this.todoForm.value };
+    const dialogResponse: TodoDialogResponse = { todo, action: this.action };
+    this.dialogRef.close(dialogResponse);
+  }
+
+  compareCategories(o1: Category, o2: Category): boolean {
+    return o1.name === o2.name && o1.color === o2.color;
   }
 }
