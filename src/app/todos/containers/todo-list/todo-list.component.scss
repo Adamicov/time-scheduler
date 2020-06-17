@@ -4,3 +4,9 @@
   margin-right: auto;
   padding: 8px;
 }
+
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

@@ -1,17 +1,19 @@
 import { Todo } from '@models/todo';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as TodosActions from './todos.actions';
-import { createEntityAdapter, EntityAdapter, EntityState, Update } from '@ngrx/entity';
+import {
+  createEntityAdapter,
+  EntityAdapter,
+  EntityState,
+  Update,
+} from '@ngrx/entity';
 import * as uuid from 'uuid';
 import { getUniqueId } from '@shared/utils';
 
-
 export const FEATURE_KEY = 'todos';
-
 export function reducer(state: TodosState | undefined, action: Action) {
   return todosReducer(state, action);
 }
-
 
 export interface TodosState extends EntityState<Todo> {
   loaded: boolean;
@@ -29,15 +31,15 @@ export const initialState: TodosState = adapter.getInitialState({
       deadline: new Date(),
       description: 'my todo',
       status: 'DONE',
-      category: { name: 'Work', color: '#6f3e19' }
+      category: { name: 'Work', color: '#6f3e19' },
     },
     2: {
       id: 2,
       title: 'Todo Canceled',
       deadline: new Date(),
       description: 'my todo',
-      status: 'CANCELED',
-      category: { name: 'Work', color: '#6f3e19' }
+      status: 'PENDING',
+      category: { name: 'Work', color: '#6f3e19' },
     },
     3: {
       id: 3,
@@ -45,57 +47,60 @@ export const initialState: TodosState = adapter.getInitialState({
       deadline: new Date(),
       description: 'my todo',
       status: 'DONE',
-      category: { name: 'Work', color: '#6f3e19' }
+      category: { name: 'Work', color: '#6f3e19' },
     },
   },
   loaded: false,
-  loading: false
+  loading: false,
 });
 
 const todosReducer = createReducer(
   initialState,
   on(TodosActions.loadTodos, (state: TodosState) => ({
     ...state,
-    loading: false
+    loading: false,
   })),
   on(TodosActions.loadTodosFail, (state: TodosState) => ({
     ...state,
     loaded: false,
-    loading: false
+    loading: false,
   })),
   on(TodosActions.loadTodosSuccess, (state: TodosState, { todos }) => {
     return adapter.setAll(todos, { ...state, loaded: true, loading: false });
   }),
   on(TodosActions.createTodo, (state: TodosState, { todo }) => {
-    return adapter.addOne({id: getUniqueId(), ...todo}, state);
+    return adapter.addOne(
+      { id: getUniqueId(), status: 'PENDING', ...todo },
+      state
+    );
   }),
   on(TodosActions.updateTodo, (state: TodosState, { todo }) => ({
-    ...state
+    ...state,
   })),
-  on(TodosActions.updateTodoSuccess, (state: TodosState, {todo}) => {
+  on(TodosActions.updateTodoSuccess, (state: TodosState, { todo }) => {
     const update: Update<Todo> = {
       id: todo.id,
       changes: {
-        ...todo
-      }
+        ...todo,
+      },
     };
     return adapter.updateOne(update, state);
   }),
-  on(TodosActions.markTodoDone, (state: TodosState, {todo}) => {
+  on(TodosActions.markTodoDone, (state: TodosState, { todo }) => {
     const update: Update<Todo> = {
       id: todo.id,
       changes: {
-        status: 'DONE'
-      }
+        status: 'DONE',
+      },
     };
     return adapter.updateOne(update, state);
   }),
-  on(TodosActions.markTodoCanceled, (state: TodosState, {todo}) => {
+  on(TodosActions.markTodoCanceled, (state: TodosState, { todo }) => {
     const update: Update<Todo> = {
       id: todo.id,
       changes: {
-        status: 'CANCELED'
-      }
+        status: 'CANCELED',
+      },
     };
     return adapter.updateOne(update, state);
   })
@@ -105,5 +110,5 @@ export const {
   selectAll,
   selectEntities,
   selectIds,
-  selectTotal
+  selectTotal,
 } = adapter.getSelectors();

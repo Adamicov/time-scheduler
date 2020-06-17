@@ -2,6 +2,7 @@
   max-width: 350px;
   border-right: 5px solid;
   cursor: pointer;
+  margin: 1rem 0;
 }
 
 .title {
@@ -12,8 +13,6 @@
   &__icons {
     color: salmon;
     margin-right: 1rem;
-
-
 
     :last-child {
       margin-left: 1rem;

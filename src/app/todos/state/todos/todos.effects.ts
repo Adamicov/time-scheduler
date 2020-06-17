@@ -16,9 +16,9 @@ export class TodosEffects {
     this.actions$.pipe(
       ofType(fromTodos.updateTodo),
       concatMap((action) => {
-        return this.todoService.updateTodo(action.todo).pipe(
-          map((todo: Todo) => fromTodos.updateTodoSuccess({ todo }))
-        );
+        return this.todoService
+          .updateTodo(action.todo)
+          .pipe(map((todo: Todo) => fromTodos.updateTodoSuccess({ todo })));
       })
     )
   );
@@ -30,9 +30,11 @@ export class TodosEffects {
         concatMap((action) =>
           of(action).pipe(
             withLatestFrom(this.store.select(selectAllTodos)),
-            tap((_) => this.snackbar.open('Hello', 'Dismiss', {
-              duration: 3000
-            }))
+            tap((_) =>
+              this.snackbar.open('Hello', 'Dismiss', {
+                duration: 3000,
+              })
+            )
           )
         )
       ),

@@ -1,5 +1,13 @@
 <div class="categories">
   <mat-chip-list>
-    <app-category *ngFor="let category of defaultCategories" [category]="category"></app-category>
+    <app-category
+      *ngFor="let category of categories"
+      [category]="category"
+      (categoryClicked)="editCategory($event)">
+    </app-category>
+    <mat-chip color="primary" selected (click)="addCategory()">
+      <mat-icon>add</mat-icon>
+      <span>Add</span>
+    </mat-chip>
   </mat-chip-list>
 </div>

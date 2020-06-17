@@ -1,21 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Category } from '@models/category';
+import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { CategoryDialogComponent, CategoryDialogResponse } from '../category-dialog/category-dialog.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.scss']
+  styleUrls: ['./category-list.component.scss'],
 })
-export class CategoryListComponent implements OnInit {
+export class CategoryListComponent implements OnInit, OnDestroy {
+  @Input() categories: Category[];
 
-  defaultCategories: Category[] = [
-    {name: 'Work', color: '#6f3e19'},
-    {name: 'Sport', color: '#f8d40b'}
-  ]
+  @Output() categoryChanges = new EventEmitter<CategoryDialogResponse>();
 
-  constructor() { }
+  subscription = new Subscription();
 
-  ngOnInit(): void {
+  constructor(private dialog: MatDialog) {}
+
+  ngOnInit(): void {}
+
+  addCategory() {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      data: {},
+    });
+    this.closeDialog(dialogRef);
   }
 
+  editCategory(category: Category) {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      data: { category },
+    });
+    this.closeDialog(dialogRef);
+  }
+
+  closeDialog(dialogRef) {
+    this.subscription.add(
+      dialogRef
+        .afterClosed()
+        .pipe(filter((res) => !!res))
+        .subscribe((res) => this.categoryChanges.emit(res))
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

@@ -12,9 +12,8 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { TodoDialogComponent } from './components/todo-dialog/todo-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import * as fromTodos from './state/todos/todos.reducers';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,6 +22,8 @@ import { TodosEffects } from './state/todos/todos.effects';
 import { SharedModule } from '@shared/shared.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { todosModule, reducers } from './state';
+import { CategoryDialogComponent } from './components/category-dialog/category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +32,10 @@ import { MatIconModule } from '@angular/material/icon';
     CategoryListComponent,
     CategoryComponent,
     TodoDialogComponent,
+    CategoryDialogComponent,
   ],
   imports: [
-    StoreModule.forFeature(fromTodos.FEATURE_KEY, fromTodos.reducer),
+    StoreModule.forFeature(todosModule, reducers),
     EffectsModule.forFeature([TodosEffects]),
     MatSnackBarModule,
     TodosRoutingModule,
@@ -49,7 +51,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ]
 })
 export class TodosModule {}

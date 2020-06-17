@@ -4,16 +4,16 @@ import { Store } from '@ngrx/store';
 import {
   selectAllTodos,
   selectCanceledTodos,
-  selectDoneTodos,
+  selectDoneTodos, selectPendingTodos
 } from './todos.selectors';
 import * as TodosActions from './todos.actions';
 import { Todo } from '@models/todo';
 
 @Injectable({ providedIn: 'root' })
 export class TodosFacade {
-  todos$ = this.store.select(selectAllTodos);
-  todosDone$ = this.store.select(selectDoneTodos);
-  todosCanceled = this.store.select(selectCanceledTodos);
+  todosDone$ = this.store.select(selectDoneTodos)
+  todosPending$ = this.store.select(selectPendingTodos);
+  todosCanceled$ = this.store.select(selectCanceledTodos);
 
   constructor(private store: Store<TodosState>) {}
 

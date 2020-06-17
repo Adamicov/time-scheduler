@@ -9,7 +9,7 @@ import { Todo } from '@models/todo';
 export class TodoComponent {
   @Input() todo: Todo;
 
-  @Output() todoClicked = new EventEmitter<Todo>();
+  @Output() editTodo = new EventEmitter<Todo>();
 
   @Output() markDone = new EventEmitter<Todo>();
   @Output() markCanceled = new EventEmitter<Todo>();
@@ -23,4 +23,10 @@ export class TodoComponent {
     $event.stopPropagation();
     this.markCanceled.emit(this.todo);
   }
+
+  openDescription() {
+    // TODO: Dialog with description
+  }
+
+
 }

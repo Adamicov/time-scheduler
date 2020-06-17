@@ -25,11 +25,8 @@ export interface TodoDialogResponse {
 export class TodoDialogComponent implements OnInit {
   todo: Todo | undefined;
   todoForm: FormGroup;
-  selectedCategory: Category | undefined = { name: 'Sport', color: '#f8d40b' };
-  defaultCategories: Category[] = [
-    { name: 'Work', color: '#6f3e19' },
-    { name: 'Sport', color: '#f8d40b' },
-  ];
+  selectedCategory: Category | undefined;
+  categories: Category[];
   action: string;
 
   constructor(
@@ -40,6 +37,7 @@ export class TodoDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.todo = this.data.todo;
+    this.categories = this.data.categories;
     this.action = this.todo ? UPDATE : SAVE;
     this.todoForm = this.fb.group({
       title: ['', Validators.required],

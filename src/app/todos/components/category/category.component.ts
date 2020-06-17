@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Category } from '@models/category';
 
 @Component({
   selector: 'app-category',
@@ -7,5 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CategoryComponent  {
 
-  @Input() category;
+  @Input() category: Category;
+  @Output() categoryClicked = new EventEmitter<Category>();
 }

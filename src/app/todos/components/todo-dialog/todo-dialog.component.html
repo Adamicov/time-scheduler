@@ -7,7 +7,7 @@
     <mat-form-field>
       <mat-label>Tag</mat-label>
       <mat-select [(value)]="selectedCategory" [compareWith]="compareCategories" formControlName="category">
-        <mat-option [value]="option" *ngFor="let option of defaultCategories">
+        <mat-option [value]="option" *ngFor="let option of categories ">
           <div class="category">
             <div class="category__color" [ngStyle]="{'background-color': option.color}"></div>
             <span class="mat-body-2">{{option.name}}</span>
