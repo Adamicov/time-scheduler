@@ -48,11 +48,11 @@ export class CategoryDialogComponent implements OnInit {
     this.selectedColor = color ? color : COLORS[0];
   }
 
-  selectColor(color: string) {
+  selectColor(color: string): void {
     this.selectedColor = color;
   }
 
-  submit() {
+  submit(): void {
     const previousCategory: Category | undefined = this.category;
     const category: Category = {
       ...previousCategory,
@@ -62,7 +62,7 @@ export class CategoryDialogComponent implements OnInit {
     this.dialogRef.close({data: category, action: this.action});
   }
 
-  delete() {
+  delete(): void {
     this.dialogRef.close({data: this.category, action: DELETE})
   }
 }

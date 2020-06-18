@@ -14,12 +14,12 @@ export class TodoComponent {
   @Output() markDone = new EventEmitter<Todo>();
   @Output() markCanceled = new EventEmitter<Todo>();
 
-  markAsDone($event) {
+  markAsDone($event: Event) {
     $event.stopPropagation();
     this.markDone.emit(this.todo);
   }
 
-  markAsCanceled($event) {
+  markAsCanceled($event: Event) {
     $event.stopPropagation();
     this.markCanceled.emit(this.todo);
   }

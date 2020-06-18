@@ -1,6 +1,6 @@
 import * as fromTodo from './todos/todos.reducers';
 import * as fromCategory from './category/category.reducers';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector } from '@ngrx/store';
 
 export const todosModule = 'todosModule';
 
