@@ -22,8 +22,11 @@ import { TodosEffects } from './state/todos/todos.effects';
 import { SharedModule } from '@shared/shared.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
-import { todosModule, reducers } from './state';
+import { reducers, todosModule } from './state';
 import { CategoryDialogComponent } from './components/category-dialog/category-dialog.component';
+import { TodoInfoDialogComponent } from './components/todo-info-dialog/todo-info-dialog.component';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
@@ -33,11 +36,14 @@ import { CategoryDialogComponent } from './components/category-dialog/category-d
     CategoryComponent,
     TodoDialogComponent,
     CategoryDialogComponent,
+    TodoInfoDialogComponent,
+    ConfirmDeleteComponent,
   ],
   imports: [
     StoreModule.forFeature(todosModule, reducers),
     EffectsModule.forFeature([TodosEffects]),
     MatSnackBarModule,
+    MatBottomSheetModule,
     TodosRoutingModule,
     SharedModule,
     MatCardModule,
@@ -52,7 +58,7 @@ import { CategoryDialogComponent } from './components/category-dialog/category-d
     MatNativeDateModule,
     MatSelectModule,
     MatIconModule,
-    FormsModule
-  ]
+    FormsModule,
+  ],
 })
 export class TodosModule {}

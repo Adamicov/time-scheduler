@@ -9,8 +9,14 @@ import { timeout } from 'rxjs/operators';
 export class TodosService {
   constructor() {}
 
+  // fake backend methods
+
+  createTodo(todo: Todo): Observable<Todo> {
+    return of(todo);
+  }
+
   updateTodo(todo: Todo): Observable<Todo> {
-    return of(todo).pipe(timeout(4000));
+    return of(todo);
   }
 
   markTodoDone(todo: Todo): Observable<Todo> {

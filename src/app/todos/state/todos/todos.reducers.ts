@@ -1,13 +1,7 @@
 import { Todo } from '@models/todo';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as TodosActions from './todos.actions';
-import {
-  createEntityAdapter,
-  EntityAdapter,
-  EntityState,
-  Update,
-} from '@ngrx/entity';
-import * as uuid from 'uuid';
+import { createEntityAdapter, EntityAdapter, EntityState, Update } from '@ngrx/entity';
 import { getUniqueId } from '@shared/utils';
 
 export const FEATURE_KEY = 'todos';
@@ -69,10 +63,11 @@ const todosReducer = createReducer(
     return adapter.setAll(todos, { ...state, loaded: true, loading: false });
   }),
   on(TodosActions.createTodo, (state: TodosState, { todo }) => {
-    return adapter.addOne(
-      { id: getUniqueId(), status: 'PENDING', ...todo },
-      state
-    );
+    return {...state}
+  }),
+  on(TodosActions.createTodoSuccess, (state: TodosState, { todo }) => {
+    const payload = { id: getUniqueId(), status: 'PENDING', ...todo};
+    return adapter.addOne(payload, state);
   }),
   on(TodosActions.updateTodo, (state: TodosState, { todo }) => ({
     ...state,
@@ -95,9 +90,12 @@ const todosReducer = createReducer(
     };
     return adapter.updateOne(update, state);
   }),
-  on(TodosActions.markTodoCanceled, (state: TodosState, { todo }) => {
+  on(TodosActions.cancelTodo, (state: TodosState, {todo}) => {
+    return {...state}
+  }),
+  on(TodosActions.cancelConfirm, (state: TodosState, { instance }) => {
     const update: Update<Todo> = {
-      id: todo.id,
+      id: instance.id,
       changes: {
         status: 'CANCELED',
       },
