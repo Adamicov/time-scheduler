@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Category } from '@models/category';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { filter } from 'rxjs/operators';
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryListComponent implements OnInit, OnDestroy {
   @Input() categories: Category[];
