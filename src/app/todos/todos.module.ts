@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { TodoComponent } from './components/todo/todo.component';
-import { TodoListComponent } from './containers/todo-list/todo-list.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { TodosRoutingModule } from './todos.routing';
 import { CommonModule } from '@angular/common';
@@ -24,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { todosModule, reducers } from './state';
 import { CategoryDialogComponent } from './components/category-dialog/category-dialog.component';
+import { TodoOverviewComponent } from './containers/todo-overview/todo-overview.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CategoryDialogComponent } from './components/category-dialog/category-d
     CategoryComponent,
     TodoDialogComponent,
     CategoryDialogComponent,
+    TodoOverviewComponent,
   ],
   imports: [
     StoreModule.forFeature(todosModule, reducers),

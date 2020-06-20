@@ -1,0 +1,10 @@
+<div class="todos">
+  <h3 class="mat-typography">Pending</h3>
+  <app-todo
+    *ngFor="let todo of todos"
+    [todo]="todo"
+    (editTodo)="this.editTodo.emit(todo)"
+    (markDone)="this.markTodoDone.emit(todo)"
+    (markCanceled)="this.markTodoCanceled.emit(todo)">
+  </app-todo>
+</div>

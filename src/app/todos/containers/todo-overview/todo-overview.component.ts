@@ -4,22 +4,17 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { Todo } from '@models/todo';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  SAVE,
-  TodoDialogComponent,
-  TodoDialogResponse,
-  UPDATE,
-} from '../../components/todo-dialog/todo-dialog.component';
+import { SAVE, TodoDialogComponent, TodoDialogResponse, UPDATE } from '../../components/todo-dialog/todo-dialog.component';
 import { CategoriesFacade } from '../../state/category/category.facade';
 import { Category } from '@models/category';
 import { CategoryDialogResponse, DELETE } from '../../components/category-dialog/category-dialog.component';
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss'],
+  selector: 'app-todo-overview',
+  templateUrl: './todo-overview.component.html',
+  styleUrls: ['./todo-overview.component.scss'],
 })
-export class TodoListComponent implements OnInit, OnDestroy {
+export class TodoOverviewComponent implements OnInit, OnDestroy {
   todosDone$: Observable<Todo[]>;
   todosPending$: Observable<Todo[]>;
   categories: Category[];
@@ -42,7 +37,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     );
   }
 
-  todoClicked(todo: Todo) {
+  editTodo(todo: Todo) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       data: { todo, categories: this.categories },
     });

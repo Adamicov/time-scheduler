@@ -1,0 +1,18 @@
+<div class="container" [class.active]="true">
+  <app-category-list [categories]="categories"
+                     (categoryChanges)="handleCategoryDialogResponse($event)">
+  </app-category-list>
+  <div class="grid">
+    <app-todo-list [todos]="todosPending$ | async"
+                   (editTodo)="editTodo($event)"
+                   (markTodoCanceled)="markTodoCanceled($event)"
+                   (markTodoDone)="markTodoDone($event)">
+    </app-todo-list>
+    <app-todo-list [todos]="todosDone$ | async"
+                   (editTodo)="editTodo($event)"
+                   (markTodoCanceled)="markTodoCanceled($event)"
+                   (markTodoDone)="markTodoDone($event)">
+    </app-todo-list>
+  </div>
+  <button mat-button mat-raised-button color="primary" (click)="createTodo()">Add ToDo</button>
+</div>
