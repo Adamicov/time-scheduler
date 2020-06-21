@@ -8,16 +8,16 @@
   </mat-card-title>
   <mat-card-subtitle>{{todo.category.name}}</mat-card-subtitle>
   <mat-card-actions>
-    <button *ngIf="todo.status == 'PENDING'"
+    <button *ngIf="todo.status == todoStatusEnum.Pending"
             mat-raised-button color="primary"
             (click)="markAsDone($event)">
       <mat-icon>done</mat-icon>
       Done
     </button>
-    <button *ngIf="todo.status == 'PENDING'" mat-raised-button color="accent" (click)="markAsCanceled($event)">
+    <button *ngIf="todo.status == todoStatusEnum.Pending" mat-raised-button color="accent" (click)="markAsCanceled($event)">
       <mat-icon>cancel</mat-icon>
       Cancel</button>
-    <button *ngIf="todo.status == 'DONE'" mat-raised-button color="accent" (click)="markAsCanceled($event)">
+    <button *ngIf="todo.status == todoStatusEnum.Done" mat-raised-button color="accent" (click)="markAsCanceled($event)">
       <mat-icon>cancel</mat-icon>
       Delete</button>
   </mat-card-actions>

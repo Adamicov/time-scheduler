@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from '@models/todo';
+import { TodoStatusEnum } from '@models/todo-status-enum';
 
 @Component({
   selector: 'app-todo',
@@ -8,19 +9,20 @@ import { Todo } from '@models/todo';
 })
 export class TodoComponent {
   @Input() todo: Todo;
+  todoStatusEnum = TodoStatusEnum;
 
   @Output() editTodo = new EventEmitter<Todo>();
 
   @Output() markDone = new EventEmitter<Todo>();
   @Output() markCanceled = new EventEmitter<Todo>();
 
-  markAsDone($event: Event) {
-    $event.stopPropagation();
+  markAsDone(event: Event): void {
+    event.stopPropagation();
     this.markDone.emit(this.todo);
   }
 
-  markAsCanceled($event: Event) {
-    $event.stopPropagation();
+  markAsCanceled(event: Event): void {
+    event.stopPropagation();
     this.markCanceled.emit(this.todo);
   }
 

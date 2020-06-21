@@ -1,22 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Category } from '@models/category';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COLORS } from '../../config';
+import { CrudEnum } from '@models/crud-enum';
 
 export interface CategoryDialogData {
   category?: Category | undefined;
 }
 
-export const UPDATE = 'Update';
-export const SAVE = 'Save';
-export const DELETE = 'Delete';
-
 export interface CategoryDialogResponse {
   data: Category;
-  action: string;
+  action: CrudEnum;
 }
-
 
 @Component({
   selector: 'app-category-dialog',
@@ -24,11 +20,12 @@ export interface CategoryDialogResponse {
   styleUrls: ['./category-dialog.component.scss'],
 })
 export class CategoryDialogComponent implements OnInit {
-  category: Category | undefined;
-  action: string;
-  name: string;
-  color: string;
+  crudEnum = CrudEnum;
   COLORS = COLORS;
+
+  category: Category | undefined;
+  categoryForm: FormGroup;
+  action: CrudEnum;
   selectedColor: string | undefined;
 
   constructor(
@@ -37,15 +34,25 @@ export class CategoryDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: CategoryDialogData
   ) {}
 
+  // set category(category: Category) {
+  //   this.action = category ? CrudEnum.Update : CrudEnum.Save;
+  //   const name = category?.name;
+  //   const color = category?.color;
+  //
+  //   this.name = name ? name : '';
+  //   this.selectedColor = color ? color : COLORS[0];
+  // }
+
   ngOnInit(): void {
     this.category = this.data.category;
-    this.action = this.category ? UPDATE : SAVE;
-
-    const name = this.category?.name;
-    const color = this.category?.color;
-
-    this.name = name ? name : '';
-    this.selectedColor = color ? color : COLORS[0];
+    this.selectedColor = this.category?.color ? this.category.color : COLORS[0];
+    this.action = this.category ? CrudEnum.Update : CrudEnum.Save;
+    this.categoryForm = this.fb.group({
+      name: ['', Validators.required],
+    });
+    if (this.category) {
+      this.categoryForm.patchValue({ ...this.category });
+    }
   }
 
   selectColor(color: string): void {
@@ -53,16 +60,19 @@ export class CategoryDialogComponent implements OnInit {
   }
 
   submit(): void {
-    const previousCategory: Category | undefined = this.category;
+    if (this.categoryForm.invalid) {
+      return;
+    }
+    const previousCategory: Category | undefined = this.data.category;
     const category: Category = {
       ...previousCategory,
-      name: this.name,
-      color: this.selectedColor
-    }
-    this.dialogRef.close({data: category, action: this.action});
+      name: this.categoryForm.value.name,
+      color: this.selectedColor,
+    };
+    this.dialogRef.close({ data: category, action: this.action });
   }
 
   delete(): void {
-    this.dialogRef.close({data: this.category, action: DELETE})
+    this.dialogRef.close({ data: this.category, action: CrudEnum.Delete });
   }
 }

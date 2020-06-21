@@ -1,14 +1,9 @@
 import { Todo } from '@models/todo';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as TodosActions from './todos.actions';
-import {
-  createEntityAdapter,
-  EntityAdapter,
-  EntityState,
-  Update,
-} from '@ngrx/entity';
-import * as uuid from 'uuid';
+import { createEntityAdapter, EntityAdapter, EntityState, Update } from '@ngrx/entity';
 import { getUniqueId } from '@shared/utils';
+import { TodoStatusEnum } from '@models/todo-status-enum';
 
 export const FEATURE_KEY = 'todos';
 export function reducer(state: TodosState | undefined, action: Action) {
@@ -30,7 +25,7 @@ export const initialState: TodosState = adapter.getInitialState({
       title: 'ToDO',
       deadline: new Date(),
       description: 'my todo',
-      status: 'DONE',
+      status: TodoStatusEnum.Done,
       category: { name: 'Work', color: '#6f3e19' },
     },
     2: {
@@ -38,7 +33,7 @@ export const initialState: TodosState = adapter.getInitialState({
       title: 'Todo Canceled',
       deadline: new Date(),
       description: 'my todo',
-      status: 'PENDING',
+      status: TodoStatusEnum.Pending,
       category: { name: 'Work', color: '#6f3e19' },
     },
     3: {
@@ -46,7 +41,7 @@ export const initialState: TodosState = adapter.getInitialState({
       title: 'Learn NGRX',
       deadline: new Date(),
       description: 'my todo',
-      status: 'DONE',
+      status: TodoStatusEnum.Done,
       category: { name: 'Work', color: '#6f3e19' },
     },
   },
@@ -70,7 +65,7 @@ const todosReducer = createReducer(
   }),
   on(TodosActions.createTodo, (state: TodosState, { todo }) => {
     return adapter.addOne(
-      { id: getUniqueId(), status: 'PENDING', ...todo },
+      { id: getUniqueId(), status: TodoStatusEnum.Pending, ...todo },
       state
     );
   }),
@@ -90,7 +85,7 @@ const todosReducer = createReducer(
     const update: Update<Todo> = {
       id: todo.id,
       changes: {
-        status: 'DONE',
+        status: TodoStatusEnum.Done,
       },
     };
     return adapter.updateOne(update, state);
@@ -99,7 +94,7 @@ const todosReducer = createReducer(
     const update: Update<Todo> = {
       id: todo.id,
       changes: {
-        status: 'CANCELED',
+        status: TodoStatusEnum.Canceled,
       },
     };
     return adapter.updateOne(update, state);
