@@ -3,8 +3,8 @@
   <app-todo
     *ngFor="let todo of todos"
     [todo]="todo"
-    (editTodo)="this.editTodo.emit(todo)"
-    (markDone)="this.markTodoDone.emit(todo)"
-    (markCanceled)="this.markTodoCanceled.emit(todo)">
+    (editTodo)="onEdit(todo)"
+    (markDone)="onDone(todo)"
+    (markCanceled)="onCanceled(todo)">
   </app-todo>
 </div>
