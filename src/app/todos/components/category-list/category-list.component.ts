@@ -1,15 +1,26 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Category } from '@models/category';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { CategoryDialogComponent, CategoryDialogResponse } from '../category-dialog/category-dialog.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  CategoryDialogComponent,
+  CategoryDialogResponse,
+} from '../category-dialog/category-dialog.component';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryListComponent implements OnInit, OnDestroy {
   @Input() categories: Category[];
@@ -22,21 +33,21 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  addCategory() {
+  addCategory(): void {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
       data: {},
     });
     this.closeDialog(dialogRef);
   }
 
-  editCategory(category: Category) {
+  editCategory(category: Category): void {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
       data: { category },
     });
     this.closeDialog(dialogRef);
   }
 
-  closeDialog(dialogRef) {
+  closeDialog(dialogRef: MatDialogRef<CategoryDialogComponent>) {
     this.subscription.add(
       dialogRef
         .afterClosed()
