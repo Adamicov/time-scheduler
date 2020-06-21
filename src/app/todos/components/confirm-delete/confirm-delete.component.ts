@@ -27,8 +27,8 @@ export class ConfirmDeleteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  delete($event: Event): void {
+  delete(event: Event): void {
     this.bottomSheetRef.dismiss({ instance: this.data.instance });
-    $event.preventDefault();
+    event.preventDefault();
   }
 }
