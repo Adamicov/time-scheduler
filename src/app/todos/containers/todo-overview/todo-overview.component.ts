@@ -12,11 +12,11 @@ import { CrudEnum } from '@models/crud-enum';
 import { TodoInfoDialogComponent } from '../../components/todo-info-dialog/todo-info-dialog.component';
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss'],
+  selector: 'app-todo-overview',
+  templateUrl: './todo-overview.component.html',
+  styleUrls: ['./todo-overview.component.scss'],
 })
-export class TodoListComponent implements OnInit, OnDestroy {
+export class TodoOverviewComponent implements OnInit, OnDestroy {
   todosDone$: Observable<Todo[]>;
   todosPending$: Observable<Todo[]>;
   categories: Category[];
@@ -39,7 +39,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
     );
   }
 
-  todoClicked(todo: Todo): void {
+
+  editTodo(todo: Todo) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       data: { todo, categories: this.categories },
     });

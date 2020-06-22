@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { TodoComponent } from './components/todo/todo.component';
-import { TodoListComponent } from './containers/todo-list/todo-list.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { TodosRoutingModule } from './todos.routing';
 import { CommonModule } from '@angular/common';
@@ -29,6 +29,7 @@ import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-dele
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { TodosChartsComponent } from './components/todos-charts/todos-charts.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TodoOverviewComponent } from './containers/todo-overview/todo-overview.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CategoryDialogComponent,
     TodoInfoDialogComponent,
     ConfirmDeleteComponent,
-    TodosChartsComponent
+    TodosChartsComponent,
+    TodoOverviewComponent,
   ],
   imports: [
     StoreModule.forFeature(todosModule, reducers),
