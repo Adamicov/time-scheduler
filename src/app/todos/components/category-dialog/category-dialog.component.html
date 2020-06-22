@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>Todo</h2>
 <mat-dialog-content>
-  <form #categoryForm="ngForm">
+  <form [formGroup]="categoryForm">
     <mat-form-field>
-      <input type="text" matInput required [(ngModel)]="name" placeholder="Name" name="name">
+      <input type="text" matInput required placeholder="Name" formControlName="name">
     </mat-form-field>
   </form>
   <div class="label" [ngStyle]="{'color': selectedColor}">
@@ -11,7 +11,6 @@
   <div class="color-picker">
     <div class="color-picker__color"
          *ngFor="let color of COLORS"
-         [class.selected]="category?.color === 'color'"
          [ngStyle]="{'background-color': color}"
         (click)="selectColor(color)">
     </div>
@@ -21,7 +20,7 @@
   <button mat-button mat-raised-button color="primary" class="mr-auto"
           [disabled]="categoryForm.controls.name?.invalid"
           (click)="submit()">{{action}}</button>
-  <button *ngIf="action === 'Update'"
+  <button *ngIf="action === crudEnum.Update"
            mat-button mat-raised-button color="accent" class="ml-auto"
           [mat-dialog-close]="true"
           (click)="delete()">

@@ -1,12 +1,12 @@
 import { Category } from '@models/category';
-import { CANCELED, DONE, PENDING } from '@models/types';
+import { TodoStatusEnum } from '@models/todo-status-enum';
 
 export interface Todo {
   id?: string;
   title: string;
   description: string;
   category: Category;
-  status: DONE | CANCELED | PENDING;
+  status: TodoStatusEnum;
   deadline: Date;
 }
 

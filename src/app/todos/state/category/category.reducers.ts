@@ -1,15 +1,9 @@
-import * as uuid from 'uuid';
 import { getUniqueId } from '@shared/utils';
 import { Category } from '@models/category';
 import { Action, createReducer, on } from '@ngrx/store';
-import {
-  createEntityAdapter,
-  EntityAdapter,
-  EntityState,
-  Update,
-} from '@ngrx/entity';
+import { createEntityAdapter, EntityAdapter, EntityState, Update } from '@ngrx/entity';
 import * as CategoriesActions from './category.actions';
-import { updateCategory } from './category.actions';
+import { COLORS } from '../../config';
 
 export const FEATURE_KEY = 'categories';
 
@@ -25,7 +19,7 @@ export interface CategoryState extends EntityState<Category> {
 export const adapter: EntityAdapter<Category> = createEntityAdapter<Category>();
 
 export const initialState: CategoryState = adapter.getInitialState({
-  ids: [1, 2],
+  ids: [1, 2, 3],
   entities: {
     1: {
       id: 1,
@@ -37,6 +31,11 @@ export const initialState: CategoryState = adapter.getInitialState({
       name: 'Sport',
       color: '#de5c07',
     },
+    3: {
+      id: 3,
+      name: 'Coding',
+      color: COLORS[3]
+    }
   },
   loading: false,
   loaded: false,

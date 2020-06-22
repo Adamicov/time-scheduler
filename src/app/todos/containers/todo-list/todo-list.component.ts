@@ -4,19 +4,11 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { Todo } from '@models/todo';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import {
-  SAVE,
-  TodoDialogComponent,
-  TodoDialogResponse,
-  UPDATE,
-} from '../../components/todo-dialog/todo-dialog.component';
+import { TodoDialogComponent, TodoDialogResponse } from '../../components/todo-dialog/todo-dialog.component';
 import { CategoriesFacade } from '../../state/category/category.facade';
 import { Category } from '@models/category';
-import {
-  CategoryDialogResponse,
-  DELETE,
-} from '../../components/category-dialog/category-dialog.component';
-import { TodoInfoDialogComponent } from '../../components/todo-info-dialog/todo-info-dialog.component';
+import { CategoryDialogResponse } from '../../components/category-dialog/category-dialog.component';
+import { CrudEnum } from '@models/crud-enum';
 
 @Component({
   selector: 'app-todo-list',
@@ -46,21 +38,22 @@ export class TodoListComponent implements OnInit, OnDestroy {
     );
   }
 
-  todoClicked(todo: Todo) {
+  todoClicked(todo: Todo): void {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       data: { todo, categories: this.categories },
     });
     this.closeDialog(dialogRef);
   }
 
-  createTodo() {
+  createTodo(): void {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       data: { categories: this.categories },
     });
     this.closeDialog(dialogRef);
   }
 
-  closeDialog(dialogRef: MatDialogRef<TodoDialogComponent>) {
+
+  closeDialog(dialogRef: MatDialogRef<TodoDialogComponent>): void {
     dialogRef
       .afterClosed()
       .pipe(
@@ -70,40 +63,39 @@ export class TodoListComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  handleTodoDialogResponse(res: TodoDialogResponse) {
+  handleTodoDialogResponse(res: TodoDialogResponse): void {
     switch (res.action) {
-      case SAVE:
+      case CrudEnum.Save:
         this.todosFacade.createTodo(res.todo);
         break;
-      case UPDATE:
+      case CrudEnum.Update:
         this.todosFacade.updateTodo(res.todo);
         break;
     }
   }
 
-  handleCategoryDialogResponse(res: CategoryDialogResponse) {
-    console.log(res);
+  handleCategoryDialogResponse(res: CategoryDialogResponse): void {
     switch (res.action) {
-      case SAVE:
+      case CrudEnum.Save:
         this.categoriesFacade.createCategory(res.data);
         break;
-      case UPDATE:
+      case CrudEnum.Update:
         this.categoriesFacade.updateCategory(res.data);
         break;
-      case DELETE:
+      case CrudEnum.Delete:
         this.categoriesFacade.deleteCategory(res.data);
     }
   }
 
-  markTodoDone(todo: Todo) {
+  markTodoDone(todo: Todo): void {
     this.todosFacade.markTodoDone(todo);
   }
 
-  markTodoCanceled(todo: Todo) {
+  markTodoCanceled(todo: Todo): void {
     this.todosFacade.markTodoCanceled(todo);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 

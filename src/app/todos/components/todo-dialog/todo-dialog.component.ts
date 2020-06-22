@@ -3,18 +3,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from '@models/category';
 import { Todo } from '@models/todo';
+import { compareCategoriesFn } from '@shared/compareUtils';
+import { CrudEnum } from '@models/crud-enum';
 
 export interface TodoDialogData {
   todo?: Todo;
   categories?: Category[] | undefined;
 }
 
-export const UPDATE = 'Update';
-export const SAVE = 'Save';
-
 export interface TodoDialogResponse {
   todo: Todo;
-  action: string;
+  action: CrudEnum;
 }
 
 @Component({
@@ -23,11 +22,13 @@ export interface TodoDialogResponse {
   styleUrls: ['./todo-dialog.component.scss'],
 })
 export class TodoDialogComponent implements OnInit {
+  compareCategoriesFn = compareCategoriesFn;
+
   todo: Todo | undefined;
   todoForm: FormGroup;
   selectedCategory: Category | undefined;
   categories: Category[];
-  action: string;
+  action: CrudEnum;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +39,7 @@ export class TodoDialogComponent implements OnInit {
   ngOnInit(): void {
     this.todo = this.data.todo;
     this.categories = this.data.categories;
-    this.action = this.todo ? UPDATE : SAVE;
+    this.action = this.todo ? CrudEnum.Update : CrudEnum.Save;
     this.todoForm = this.fb.group({
       title: ['', Validators.required],
       description: [],
@@ -48,21 +49,15 @@ export class TodoDialogComponent implements OnInit {
     if (this.todo) {
       this.todoForm.patchValue({ ...this.todo });
       this.selectedCategory = this.todo.category;
-      console.log(this.selectedCategory);
     }
   }
 
   submit(): void {
     if (this.todoForm.invalid) {
-      console.log(this.todoForm);
       return;
     }
     const todo: Todo = { ...this.todo, ...this.todoForm.value };
     const dialogResponse: TodoDialogResponse = { todo, action: this.action };
     this.dialogRef.close(dialogResponse);
-  }
-
-  compareCategories(o1: Category, o2: Category): boolean {
-    return o1.name === o2.name && o1.color === o2.color;
   }
 }
