@@ -27,6 +27,8 @@ import { CategoryDialogComponent } from './components/category-dialog/category-d
 import { TodoInfoDialogComponent } from './components/todo-info-dialog/todo-info-dialog.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { TodosChartsComponent } from './components/todos-charts/todos-charts.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -38,10 +40,12 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     CategoryDialogComponent,
     TodoInfoDialogComponent,
     ConfirmDeleteComponent,
+    TodosChartsComponent
   ],
   imports: [
     StoreModule.forFeature(todosModule, reducers),
     EffectsModule.forFeature([TodosEffects]),
+    NgxChartsModule,
     MatSnackBarModule,
     MatBottomSheetModule,
     TodosRoutingModule,
