@@ -9,6 +9,7 @@ import { CategoriesFacade } from '../../state/category/category.facade';
 import { Category } from '@models/category';
 import { CategoryDialogResponse } from '../../components/category-dialog/category-dialog.component';
 import { CrudEnum } from '@models/crud-enum';
+import { TodoInfoDialogComponent } from '../../components/todo-info-dialog/todo-info-dialog.component';
 
 @Component({
   selector: 'app-todo-list',
