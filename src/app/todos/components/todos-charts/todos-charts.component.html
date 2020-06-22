@@ -1,10 +1,14 @@
 <div class="container">
-  <ngx-charts-pie-chart
-    [doughnut]="true"
-    [results]="result"
-    [explodeSlices]="true"
-    [customColors]="colorFn"
-    arcWidth="0.5"
-  >
-  </ngx-charts-pie-chart>
+  <div class="chart-container">
+    <div class="mat-title">Pending</div>
+    <div class="chart">
+      <ngx-charts-pie-chart
+        [doughnut]="true"
+        [results]="results"
+        [customColors]="colorFn"
+        arcWidth="0.5">
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+
 </div>

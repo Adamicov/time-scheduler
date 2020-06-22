@@ -5,11 +5,25 @@ export interface NgxChartsData {
   value: number;
 }
 
-export interface TodosAmountData {
-  [categoryName: string]: {
-    categoryName: string;
-    todosAmount: number;
-    category: Category;
-  }
+export interface TodoAmountObject {
+  categoryName: string;
+  todosAmount: number;
+  category: Category;
 }
 
+export interface TodosAmountData {
+  [categoryName: string]: TodoAmountObject
+}
+
+
+export function createNgxChartsDataFromTodosAmount(
+  data: TodosAmountData
+): NgxChartsData[] {
+  console.log(Object.values(data));
+  return Object.values(data).map((obj: TodoAmountObject) => {
+    return {
+      name: obj.categoryName,
+      value: obj.todosAmount
+    }
+  })
+}

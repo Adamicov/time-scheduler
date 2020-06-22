@@ -1,15 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TodosFacade } from '../../state/todos/todos.facade';
 import { Observable, Subscription } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { Todo } from '@models/todo';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { TodoDialogComponent, TodoDialogResponse } from '../../components/todo-dialog/todo-dialog.component';
+import {
+  TodoDialogComponent,
+  TodoDialogResponse,
+} from '../../components/todo-dialog/todo-dialog.component';
 import { CategoriesFacade } from '../../state/category/category.facade';
 import { Category } from '@models/category';
 import { CategoryDialogResponse } from '../../components/category-dialog/category-dialog.component';
 import { CrudEnum } from '@models/crud-enum';
 import { TodoInfoDialogComponent } from '../../components/todo-info-dialog/todo-info-dialog.component';
+import { TodosAmountData } from '@models/chart-category-data';
 
 @Component({
   selector: 'app-todo-overview',
@@ -19,6 +23,7 @@ import { TodoInfoDialogComponent } from '../../components/todo-info-dialog/todo-
 export class TodoOverviewComponent implements OnInit, OnDestroy {
   todosDone$: Observable<Todo[]>;
   todosPending$: Observable<Todo[]>;
+  todosAmountDone$: Observable<TodosAmountData>;
   categories: Category[];
 
   subscription = new Subscription();
@@ -31,6 +36,7 @@ export class TodoOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.todosDone$ = this.todosFacade.todosDone$;
+    this.todosAmountDone$ = this.getTodosAmount();
     this.todosPending$ = this.todosFacade.todosPending$;
     this.subscription.add(
       this.categoriesFacade.categories$.subscribe((categories: Category[]) => {
@@ -38,7 +44,6 @@ export class TodoOverviewComponent implements OnInit, OnDestroy {
       })
     );
   }
-
 
   editTodo(todo: Todo) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
@@ -53,7 +58,6 @@ export class TodoOverviewComponent implements OnInit, OnDestroy {
     });
     this.closeDialog(dialogRef);
   }
-
 
   closeDialog(dialogRef: MatDialogRef<TodoDialogComponent>): void {
     dialogRef
@@ -97,12 +101,41 @@ export class TodoOverviewComponent implements OnInit, OnDestroy {
     this.todosFacade.markTodoCanceled(todo);
   }
 
+  openTodoInfoDialog(todo: Todo) {
+    const dialogRef = this.dialog.open(TodoInfoDialogComponent, { data: todo });
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  openTodoInfoDialog(todo: Todo) {
-    const dialogRef = this.dialog.open(TodoInfoDialogComponent, { data: todo });
+  private getTodosAmount(): Observable<TodosAmountData> {
+    return this.todosFacade.todosPending$.pipe(
+      map((todos: Todo[]) => {
+        const categories = todos.map((todo) => todo.category);
+        console.log(categories);
+        return this.countCategories(categories);
+      })
+    );
+  }
 
+  private countCategories(categories: Category[]): TodosAmountData {
+    return categories.reduce((data: TodosAmountData, category: Category) => {
+      console.log('Jestem');
+      const temp: TodosAmountData = {
+        [category.name]: {
+          categoryName: category.name,
+          todosAmount: data[category.name]
+            ? data[category.name].todosAmount + 1
+            : 1,
+          category,
+        },
+      };
+      console.log(data);
+      return {
+        ...data,
+        ...temp,
+      };
+    }, {});
   }
 }

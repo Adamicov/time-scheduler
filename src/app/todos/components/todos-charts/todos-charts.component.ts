@@ -1,49 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ChartCategoriesData, ChartCategoryData } from '@models/chart-category-data';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { createNgxChartsDataFromTodosAmount, NgxChartsData, TodosAmountData } from '@models/chart-category-data';
 
 @Component({
   selector: 'app-todos-charts',
   templateUrl: './todos-charts.component.html',
   styleUrls: ['./todos-charts.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodosChartsComponent implements OnInit {
-  result: ChartCategoryData[];
+export class TodosChartsComponent implements OnInit, OnChanges {
+  @Input() data: TodosAmountData;
 
-  set chartData(data: ChartCategoriesData) {
-    this.result = Object.values(data);
-    console.log(this.result);
+  results: NgxChartsData[];
+  colorFn = (name: string) => this.data[name].category.color;
+
+  set chartData(data: TodosAmountData) {
+    this.results = [...createNgxChartsDataFromTodosAmount(data)];
   }
 
-  @Input() data: ChartCategoriesData = {
-    Work: {
-      label: 'Work',
-      name: 'Work',
-      value: 7,
-      category: {
-        id: '1',
-        name: 'Work',
-        color: '#6f3e19',
-      },
-    },
-    Sport: {
-      label: 'Sport',
-      name: 'Sport',
-      value: 7,
-      category: {
-        id: '2',
-        name: 'Work',
-        color: '#f56b06',
-      },
-    },
-  };
-
-  constructor() {
-    this.chartData = this.data;
-  }
-
-  colorFn = (name: string) => {
-    return this.data[name].category.color;
-  };
+  constructor() {}
 
   ngOnInit(): void {}
+
+  ngOnChanges(): void {
+    this.chartData = this.data;
+  }
 }
