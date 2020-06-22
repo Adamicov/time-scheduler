@@ -1,13 +1,20 @@
-<div class="categories">
-  <mat-chip-list>
-    <app-category
-      *ngFor="let category of categories"
-      [category]="category"
-      (categoryClicked)="editCategory($event)">
-    </app-category>
-    <mat-chip color="primary" selected (click)="addCategory()">
-      <mat-icon>add</mat-icon>
-      <span>Add</span>
-    </mat-chip>
-  </mat-chip-list>
-</div>
+<mat-card>
+  <mat-card-title>
+    <mat-icon>local_offer</mat-icon>
+    Tags
+  </mat-card-title>
+  <mat-divider [inset]="true"></mat-divider>
+  <mat-card-content>
+    <mat-chip-list>
+      <app-category
+        *ngFor="let category of categories"
+        [category]="category"
+        (categoryClicked)="editCategory($event)">
+      </app-category>
+      <mat-chip color="primary" selected (click)="addCategory()">
+        <mat-icon>add</mat-icon>
+        <span>Add</span>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card-content>
+</mat-card>

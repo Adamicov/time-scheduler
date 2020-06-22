@@ -30,6 +30,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { TodosChartsComponent } from './components/todos-charts/todos-charts.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TodoOverviewComponent } from './containers/todo-overview/todo-overview.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { TodoOverviewComponent } from './containers/todo-overview/todo-overview.
     MatSelectModule,
     MatIconModule,
     FormsModule,
-  ],
+    MatDividerModule
+  ]
 })
 export class TodosModule {}

@@ -2,7 +2,9 @@
   <app-category-list [categories]="categories"
                      (categoryChanges)="handleCategoryDialogResponse($event)">
   </app-category-list>
-  <app-todos-charts [data]="todosAmountDone$ | async"></app-todos-charts>
+  <div class="charts-wrapper">
+    <app-todos-charts [data]="todosAmountDone$ | async"></app-todos-charts>
+  </div>
   <div class="grid">
     <app-todo-list [todos]="todosPending$ | async"
                    (editTodo)="editTodo($event)"

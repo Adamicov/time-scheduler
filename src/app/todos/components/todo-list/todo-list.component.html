@@ -1,4 +1,5 @@
-<div class="todos">
+<mat-card>
+  <mat-card-title></mat-card-title>
   <app-todo
     *ngFor="let todo of todos"
     [todo]="todo"
@@ -6,4 +7,5 @@
     (markDone)="onDone(todo)"
     (markCanceled)="onCanceled(todo)">
   </app-todo>
-</div>
+</mat-card>
+
