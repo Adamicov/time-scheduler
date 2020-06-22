@@ -1,7 +1,10 @@
 <div class="container" [class.active]="true">
-  <app-category-list [categories]="categories"
-                     (categoryChanges)="handleCategoryDialogResponse($event)">
-  </app-category-list>
+  <div class="grid">
+    <app-category-list [categories]="categories"
+                       (categoryChanges)="handleCategoryDialogResponse($event)">
+    </app-category-list>
+    <app-actions-history></app-actions-history>
+  </div>
   <div class="charts-wrapper">
     <app-todos-charts [data]="todosAmountDone$ | async"></app-todos-charts>
   </div>

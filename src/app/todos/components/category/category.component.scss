@@ -1,16 +1,4 @@
-mat-chip {
-  cursor: pointer;
-}
-
-.chip {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 70px;
-
-  &__color {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
+.category-btn {
+  border-right: 5px solid;
+  margin: 0.5rem;
 }
