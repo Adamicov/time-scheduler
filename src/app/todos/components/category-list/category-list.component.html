@@ -7,7 +7,7 @@
   <mat-card-content>
     <div class="categories">
       <app-category
-        *ngFor="let category of categories"
+        *ngFor="let category of categories; trackBy: trackById"
         [category]="category"
         (categoryClicked)="editCategory($event)">
       </app-category>

@@ -1,2 +1,6 @@
-
-<button mat-raised-button class="category-btn" [ngStyle]="{'border-color': category.color}">{{category.name}} </button>
+<button class="category-btn"
+        mat-raised-button
+        [ngStyle]="{'border-color': category.color}"
+        (click)="onClick()">
+  {{category.name}}
+</button>

@@ -15,6 +15,7 @@ import {
   CategoryDialogResponse,
 } from '../category-dialog/category-dialog.component';
 import { filter } from 'rxjs/operators';
+import { trackById } from '@shared/utils';
 
 @Component({
   selector: 'app-category-list',
@@ -28,6 +29,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   @Output() categoryChanges = new EventEmitter<CategoryDialogResponse>();
 
   subscription = new Subscription();
+  trackById = trackById;
 
   constructor(private dialog: MatDialog) {}
 

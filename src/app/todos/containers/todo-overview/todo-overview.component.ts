@@ -113,7 +113,6 @@ export class TodoOverviewComponent implements OnInit, OnDestroy {
     return this.todosFacade.todosPending$.pipe(
       map((todos: Todo[]) => {
         const categories = todos.map((todo) => todo.category);
-        console.log(categories);
         return this.countCategories(categories);
       })
     );
@@ -121,7 +120,6 @@ export class TodoOverviewComponent implements OnInit, OnDestroy {
 
   private countCategories(categories: Category[]): TodosAmountData {
     return categories.reduce((data: TodosAmountData, category: Category) => {
-      console.log('Jestem');
       const temp: TodosAmountData = {
         [category.name]: {
           categoryName: category.name,
@@ -131,7 +129,6 @@ export class TodoOverviewComponent implements OnInit, OnDestroy {
           category,
         },
       };
-      console.log(data);
       return {
         ...data,
         ...temp,

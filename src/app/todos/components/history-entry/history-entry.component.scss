@@ -1,0 +1,14 @@
+:host ::ng-deep .mat-list-item-content {
+  justify-content: space-between;
+}
+
+.entry {
+
+  &--text-done {
+    color: #1bd281;
+  }
+
+  &--text-danger {
+    color: crimson;
+  }
+}

@@ -32,6 +32,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TodoOverviewComponent } from './containers/todo-overview/todo-overview.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { ActionsHistoryComponent } from './components/actions-history/actions-history.component';
+import { HistoryEntryComponent } from './components/history-entry/history-entry.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { ActionsHistoryComponent } from './components/actions-history/actions-hi
     TodosChartsComponent,
     TodoOverviewComponent,
     ActionsHistoryComponent,
+    HistoryEntryComponent,
   ],
   imports: [
     StoreModule.forFeature(todosModule, reducers),
@@ -68,7 +71,8 @@ import { ActionsHistoryComponent } from './components/actions-history/actions-hi
     MatSelectModule,
     MatIconModule,
     FormsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatListModule
   ]
 })
 export class TodosModule {}

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Todo } from '@models/todo';
 import { TodoStatusEnum } from '@models/todo-status-enum';
 
@@ -7,7 +7,7 @@ import { TodoStatusEnum } from '@models/todo-status-enum';
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss'],
 })
-export class TodoComponent {
+export class TodoComponent implements OnChanges {
   @Input() todo: Todo;
   todoStatusEnum = TodoStatusEnum;
 
@@ -25,5 +25,9 @@ export class TodoComponent {
   markAsCanceled(event: Event): void {
     event.stopPropagation();
     this.markCanceled.emit(this.todo);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
   }
 }

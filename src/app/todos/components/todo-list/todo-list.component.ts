@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { Todo } from '@models/todo';
+import { trackById } from '@shared/utils';
 
 @Component({
   selector: 'app-todo-list',
@@ -20,6 +21,8 @@ export class TodoListComponent {
   @Output() markTodoCanceled = new EventEmitter<Todo>();
   @Output() markTodoDone = new EventEmitter<Todo>();
 
+  trackById = trackById;
+
   onEdit(todo: Todo): void {
     this.editTodo.emit(todo);
   }
@@ -31,4 +34,5 @@ export class TodoListComponent {
   onDone(todo: Todo): void {
     this.markTodoDone.emit(todo);
   }
+
 }

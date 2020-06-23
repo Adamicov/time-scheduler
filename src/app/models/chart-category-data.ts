@@ -12,18 +12,16 @@ export interface TodoAmountObject {
 }
 
 export interface TodosAmountData {
-  [categoryName: string]: TodoAmountObject
+  [categoryName: string]: TodoAmountObject;
 }
-
 
 export function createNgxChartsDataFromTodosAmount(
   data: TodosAmountData
 ): NgxChartsData[] {
-  console.log(Object.values(data));
   return Object.values(data).map((obj: TodoAmountObject) => {
     return {
       name: obj.categoryName,
-      value: obj.todosAmount
-    }
-  })
+      value: obj.todosAmount,
+    };
+  });
 }
