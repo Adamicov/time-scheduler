@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title></mat-card-title>
+  <app-todo
+    *ngFor="let todo of todos; trackBy: trackById"
+    [todo]="todo"
+    (editTodo)="onEdit(todo)"
+    (markDone)="onDone(todo)"
+    (markCanceled)="onCanceled(todo)">
+  </app-todo>
+</mat-card>
+

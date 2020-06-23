@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { TodoComponent } from './components/todo/todo.component';
-import { TodoListComponent } from './containers/todo-list/todo-list.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { TodosRoutingModule } from './todos.routing';
 import { CommonModule } from '@angular/common';
@@ -27,6 +27,13 @@ import { CategoryDialogComponent } from './components/category-dialog/category-d
 import { TodoInfoDialogComponent } from './components/todo-info-dialog/todo-info-dialog.component';
 import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { TodosChartsComponent } from './components/todos-charts/todos-charts.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TodoOverviewComponent } from './containers/todo-overview/todo-overview.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { ActionsHistoryComponent } from './components/actions-history/actions-history.component';
+import { HistoryEntryComponent } from './components/history-entry/history-entry.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -38,10 +45,15 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     CategoryDialogComponent,
     TodoInfoDialogComponent,
     ConfirmDeleteComponent,
+    TodosChartsComponent,
+    TodoOverviewComponent,
+    ActionsHistoryComponent,
+    HistoryEntryComponent,
   ],
   imports: [
     StoreModule.forFeature(todosModule, reducers),
     EffectsModule.forFeature([TodosEffects]),
+    NgxChartsModule,
     MatSnackBarModule,
     MatBottomSheetModule,
     TodosRoutingModule,
@@ -59,6 +71,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatSelectModule,
     MatIconModule,
     FormsModule,
-  ],
+    MatDividerModule,
+    MatListModule
+  ]
 })
 export class TodosModule {}

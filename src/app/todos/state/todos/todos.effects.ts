@@ -32,7 +32,6 @@ export class TodosEffects {
   createTodoSuccess = this.actions$.pipe(
     ofType(fromTodos.createTodoSuccess),
     concatMap((action: Action) => {
-      console.log(action);
       return of(action).pipe(
         withLatestFrom(this.store.select(selectAllTodos)),
         tap((_) =>

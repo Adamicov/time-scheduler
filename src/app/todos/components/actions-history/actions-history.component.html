@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title>
+    <mat-icon>history</mat-icon>
+    History
+  </mat-card-title>
+  <mat-divider [inset]="true"></mat-divider>
+  <mat-card-content>
+    <mat-list>
+      <ng-container *ngFor="let i of [1, 2, 3]">
+        <app-history-entry>
+
+        </app-history-entry>
+        <mat-divider [inset]="true"></mat-divider>
+      </ng-container>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button>
+      <mat-icon>read_more</mat-icon>
+      More
+    </button>
+  </mat-card-actions>
+</mat-card>

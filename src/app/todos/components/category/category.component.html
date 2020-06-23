@@ -1,6 +1,6 @@
-<mat-chip (click)="categoryClicked.emit(category)">
-  <div class="chip">
-    <div class="chip__color" [ngStyle]="{'background-color': category.color}"></div>
-    <span class="chip__name">{{category.name}}</span>
-  </div>
-</mat-chip>
+<button class="category-btn"
+        mat-raised-button
+        [ngStyle]="{'border-color': category.color}"
+        (click)="onClick()">
+  {{category.name}}
+</button>

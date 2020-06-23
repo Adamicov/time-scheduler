@@ -1,0 +1,12 @@
+<mat-list-item class="entry mat-body-1">
+  <div class="entry__icon" [ngClass]="{'entry--text-done': statusDone, 'entry--text-danger': statusCanceled}">
+    <mat-icon *ngIf="statusDone">done</mat-icon>
+    <mat-icon *ngIf="statusCanceled">cancel</mat-icon>
+  </div>
+  <div class="entry__title mat-body-2">
+    {{historyEntry.title}}
+  </div>
+  <div class="entry__date mat-body-1">
+    {{historyEntry.date | date}}
+  </div>
+</mat-list-item>

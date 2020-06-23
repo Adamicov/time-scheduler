@@ -3,6 +3,8 @@
  * @example getUniqueId(1) : 607f
  * @example getUniqueId(2) : 95ca-361a-f8a1-1e73
  */
+import { EntityState } from '@ngrx/entity';
+
 export function getUniqueId(parts: number = 5): string {
   const stringArr = [];
   for (let i = 0; i < parts; i++) {
@@ -12,3 +14,5 @@ export function getUniqueId(parts: number = 5): string {
   }
   return stringArr.join('-');
 }
+
+export const trackById = (index, item) => item.id;
