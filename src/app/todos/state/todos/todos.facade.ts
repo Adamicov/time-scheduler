@@ -34,6 +34,6 @@ export class TodosFacade {
   }
 
   markTodoCanceled(todo: Todo) {
-    this.store.dispatch(TodosActions.markTodoCanceled({ todo }));
+    this.store.dispatch(TodosActions.cancelTodo({ todo }));
   }
 }

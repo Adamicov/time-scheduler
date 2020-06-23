@@ -3,7 +3,7 @@ import { TodosFacade } from '../../state/todos/todos.facade';
 import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { Todo } from '@models/todo';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   SAVE,
   TodoDialogComponent,
@@ -12,7 +12,11 @@ import {
 } from '../../components/todo-dialog/todo-dialog.component';
 import { CategoriesFacade } from '../../state/category/category.facade';
 import { Category } from '@models/category';
-import { CategoryDialogResponse, DELETE } from '../../components/category-dialog/category-dialog.component';
+import {
+  CategoryDialogResponse,
+  DELETE,
+} from '../../components/category-dialog/category-dialog.component';
+import { TodoInfoDialogComponent } from '../../components/todo-info-dialog/todo-info-dialog.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -56,7 +60,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.closeDialog(dialogRef);
   }
 
-  closeDialog(dialogRef) {
+  closeDialog(dialogRef: MatDialogRef<TodoDialogComponent>) {
     dialogRef
       .afterClosed()
       .pipe(
@@ -84,7 +88,6 @@ export class TodoListComponent implements OnInit, OnDestroy {
         this.categoriesFacade.createCategory(res.data);
         break;
       case UPDATE:
-        console.log('Updacik');
         this.categoriesFacade.updateCategory(res.data);
         break;
       case DELETE:
@@ -102,5 +105,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  openTodoInfoDialog(todo: Todo) {
+    const dialogRef = this.dialog.open(TodoInfoDialogComponent, { data: todo });
+
   }
 }

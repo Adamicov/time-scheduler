@@ -2,7 +2,7 @@
   <mat-card-title class="title">
     <span class="title__text">{{todo.title}}</span>
     <div class="title__icons">
-      <mat-icon (click)="openDescription()">description</mat-icon>
+      <mat-icon (click)="checkTodoInfo.emit(todo)">description</mat-icon>
       <mat-icon (click)="editTodo.emit(todo)">edit</mat-icon>
     </div>
   </mat-card-title>
