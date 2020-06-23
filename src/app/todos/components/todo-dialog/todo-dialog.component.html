@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Todo</h2>
+<mat-dialog-content>
+  <form [formGroup]="todoForm">
+    <mat-form-field>
+      <input matInput formControlName="title" placeholder="Activity">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tag</mat-label>
+      <mat-select [(value)]="selectedCategory" [compareWith]="compareCategoriesFn" formControlName="category">
+        <mat-option [value]="option" *ngFor="let option of categories ">
+          <div class="category">
+            <div class="category__color" [ngStyle]="{'background-color': option.color}"></div>
+            <span class="mat-body-2">{{option.name}}</span>
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="description" placeholder="Description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Deadline</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="Deadline" formControlName="deadline">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-raised-button color="primary" class="mr-auto" (click)="submit()">{{action}}</button>
+  <button mat-button mat-raised-button color="accent" [mat-dialog-close]="true" class="ml-auto">Delete</button>
+</mat-dialog-actions>
