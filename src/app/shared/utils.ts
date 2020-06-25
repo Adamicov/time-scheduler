@@ -1,9 +1,10 @@
 /**
- * generate groups of 4 random characters
+ * generate groups of random characters
  * @example getUniqueId(1) : 607f
  * @example getUniqueId(2) : 95ca-361a-f8a1-1e73
  */
-import { EntityState } from '@ngrx/entity';
+
+import {initialState as categoriesState}  from '../todos/state/category/category.reducers';
 
 export function getUniqueId(parts: number = 5): string {
   const stringArr = [];
@@ -16,3 +17,8 @@ export function getUniqueId(parts: number = 5): string {
 }
 
 export const trackById = (index, item) => item.id;
+
+// Helper function for setting initial todos;
+export function getCategoryById(id) {
+  return categoriesState.entities[id];
+}

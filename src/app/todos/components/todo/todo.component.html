@@ -1,24 +1,41 @@
+<!--<mat-card [ngStyle]="{'border-color': todo.category.color}">-->
+<!--  <mat-card-title class="title">-->
+<!--    <span class="title__text">{{todo.title}}</span>-->
+<!--    <div class="title__icons">-->
+<!--      <mat-icon (click)="checkTodoInfo.emit(todo)">description</mat-icon>-->
+<!--      <mat-icon (click)="editTodo.emit(todo)">edit</mat-icon>-->
+<!--    </div>-->
+<!--  </mat-card-title>-->
+<!--  <mat-card-subtitle>{{todo.category.name}}</mat-card-subtitle>-->
+<!--  <mat-card-actions>-->
+<!--    <button *ngIf="todo.status == todoStatusEnum.Pending"-->
+<!--            mat-raised-button color="primary"-->
+<!--            (click)="markAsDone($event)">-->
+<!--      <mat-icon>done</mat-icon>-->
+<!--      Done-->
+<!--    </button>-->
+<!--    <button *ngIf="todo.status == todoStatusEnum.Pending" mat-raised-button color="accent" (click)="markAsCanceled($event)">-->
+<!--      <mat-icon>cancel</mat-icon>-->
+<!--      Cancel</button>-->
+<!--    <button *ngIf="todo.status == todoStatusEnum.Done" mat-raised-button color="accent" (click)="markAsCanceled($event)">-->
+<!--      <mat-icon>cancel</mat-icon>-->
+<!--      Delete</button>-->
+<!--  </mat-card-actions>-->
+<!--</mat-card>-->
 <mat-card [ngStyle]="{'border-color': todo.category.color}">
-  <mat-card-title class="title">
-    <span class="title__text">{{todo.title}}</span>
-    <div class="title__icons">
-      <mat-icon (click)="checkTodoInfo.emit(todo)">description</mat-icon>
-      <mat-icon (click)="editTodo.emit(todo)">edit</mat-icon>
+  <mat-card-content>
+    <div class="todo">
+      <div class="todo__done" (click)="markAsDone($event)">
+          <mat-icon class="icon">done</mat-icon>
+      </div>
+      <div class="todo__title mat-body-2">{{todo.title}}</div>
+      <div class="todo__comment clickable" (click)="checkTodoInfo.emit(todo)">
+        <mat-icon color="primary">comment</mat-icon>
+      </div>
+      <div class="todo__cancel clickable" (click)="markAsCanceled($event)">
+        <mat-icon color="accent">cancel</mat-icon>
+      </div>
     </div>
-  </mat-card-title>
-  <mat-card-subtitle>{{todo.category.name}}</mat-card-subtitle>
-  <mat-card-actions>
-    <button *ngIf="todo.status == todoStatusEnum.Pending"
-            mat-raised-button color="primary"
-            (click)="markAsDone($event)">
-      <mat-icon>done</mat-icon>
-      Done
-    </button>
-    <button *ngIf="todo.status == todoStatusEnum.Pending" mat-raised-button color="accent" (click)="markAsCanceled($event)">
-      <mat-icon>cancel</mat-icon>
-      Cancel</button>
-    <button *ngIf="todo.status == todoStatusEnum.Done" mat-raised-button color="accent" (click)="markAsCanceled($event)">
-      <mat-icon>cancel</mat-icon>
-      Delete</button>
-  </mat-card-actions>
+  </mat-card-content>
 </mat-card>
+

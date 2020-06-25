@@ -2,7 +2,7 @@ import { Todo } from '@models/todo';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as TodosActions from './todos.actions';
 import { createEntityAdapter, EntityAdapter, EntityState, Update } from '@ngrx/entity';
-import { getUniqueId } from '@shared/utils';
+import { getCategoryById, getUniqueId } from '@shared/utils';
 import { TodoStatusEnum } from '@models/todo-status-enum';
 
 export const FEATURE_KEY = 'todos';
@@ -18,32 +18,48 @@ export interface TodosState extends EntityState<Todo> {
 export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 export const initialState: TodosState = adapter.getInitialState({
-  ids: [1, 2, 3],
+  ids: [2, 3, 4, 5, 6],
   entities: {
-    1: {
-      id: 1,
-      title: 'ToDO',
-      deadline: new Date(),
-      description: 'my todo',
-      status: TodoStatusEnum.Done,
-      category: { name: 'Work', color: '#6f3e19' },
-    },
     2: {
       id: 2,
-      title: 'Todo Canceled',
+      title: 'Make breakfast',
       deadline: new Date(),
       description: 'my todo',
       status: TodoStatusEnum.Pending,
-      category: { name: 'Work', color: '#6f3e19' },
+      category: getCategoryById(1)
     },
     3: {
       id: 3,
-      title: 'Learn NGRX',
+      title: 'Create Project with Angular',
       deadline: new Date(),
       description: 'my todo',
-      status: TodoStatusEnum.Done,
-      category: { name: 'Work', color: '#6f3e19' },
+      status: TodoStatusEnum.Pending,
+      category:  getCategoryById(3)
     },
+    4: {
+      id: 4,
+      title: 'Run 20km',
+      deadline: new Date(),
+      description: 'my todo',
+      status: TodoStatusEnum.Pending,
+      category:  getCategoryById(2)
+    },
+    5: {
+      id: 5,
+      title: 'Learn Data Structures and Algorithms',
+      deadline: new Date(),
+      description: 'my todo',
+      status: TodoStatusEnum.Pending,
+      category:  getCategoryById(4)
+    },
+    6: {
+      id: 6,
+      title: 'Deliver functionality to client',
+      deadline: new Date(),
+      description: 'my todo',
+      status: TodoStatusEnum.Pending,
+      category:  getCategoryById(7)
+    }
   },
   loaded: false,
   loading: false,

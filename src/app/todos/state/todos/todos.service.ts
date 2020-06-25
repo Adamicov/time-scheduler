@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Todo } from '@models/todo';
-import { timeout } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
