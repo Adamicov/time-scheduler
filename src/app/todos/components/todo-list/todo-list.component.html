@@ -1,11 +1,19 @@
 <mat-card>
-  <mat-card-title></mat-card-title>
-  <app-todo
-    *ngFor="let todo of todos; trackBy: trackById"
-    [todo]="todo"
-    (editTodo)="onEdit(todo)"
-    (markDone)="onDone(todo)"
-    (markCanceled)="onCanceled(todo)">
-  </app-todo>
+  <mat-card-title>Today</mat-card-title>
+  <mat-card-subtitle>{{today | date}}</mat-card-subtitle>
+  <mat-divider [inset]="true"></mat-divider>
+  <mat-card-content>
+    <app-todo
+      *ngFor="let todo of todos; trackBy: trackById"
+      [todo]="todo"
+      (editTodo)="onEdit(todo)"
+      (markDone)="onDone(todo)"
+      (markCanceled)="onCanceled(todo)">
+    </app-todo>
+  </mat-card-content>
+  <button mat-button mat-raised-button color="primary" (click)="onCreate()">
+    <mat-icon>add</mat-icon>
+    ToDo
+  </button>
 </mat-card>
 

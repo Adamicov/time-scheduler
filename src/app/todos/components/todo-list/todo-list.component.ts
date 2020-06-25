@@ -17,11 +17,17 @@ import { trackById } from '@shared/utils';
 export class TodoListComponent {
   @Input() todos: Todo[];
 
+  @Output() createTodo = new EventEmitter<void>();
   @Output() editTodo = new EventEmitter<Todo>();
   @Output() markTodoCanceled = new EventEmitter<Todo>();
   @Output() markTodoDone = new EventEmitter<Todo>();
 
   trackById = trackById;
+  today = new Date();
+
+  onCreate(): void {
+    this.createTodo.emit();
+  }
 
   onEdit(todo: Todo): void {
     this.editTodo.emit(todo);
@@ -34,5 +40,4 @@ export class TodoListComponent {
   onDone(todo: Todo): void {
     this.markTodoDone.emit(todo);
   }
-
 }

@@ -53,7 +53,7 @@ export const initialState: CategoryState = adapter.getInitialState({
     },
     7: {
       id: 7,
-      name: 'Work',
+      name: 'Others',
       color: COLORS[7]
     }
   },
