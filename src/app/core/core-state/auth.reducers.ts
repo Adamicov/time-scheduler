@@ -30,11 +30,13 @@ const authReducer = createReducer(
   on(fromAuth.authenticated, (state: AuthState, {user}) => ({
     ...state,
     user,
+    authenticated: true,
     loading: false,
   })),
   on(fromAuth.notAuthenticated, (state: AuthState) => ({
     ...state,
     user: null,
+    authenticated: false,
     loading: false,
   })),
   on(fromAuth.authError, (state: AuthState, {error}) => ({
