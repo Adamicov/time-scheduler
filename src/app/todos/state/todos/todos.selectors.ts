@@ -6,7 +6,7 @@ import { TodoStatusEnum } from '@models/todo-status-enum';
 
 const selectTodosState = createSelector(
   selectTodosModuleState,
-  (state: TodosModuleState) => state.todos
+  (state: TodosModuleState) => state[fromTodos.FEATURE_KEY]
 );
 
 export const selectAllTodos = createSelector(

@@ -4,7 +4,7 @@ import { selectTodosModuleState, TodosModuleState } from '../index';
 
 const selectCategoriesState = createSelector(
   selectTodosModuleState,
-  (state: TodosModuleState) => state.categories
+  (state: TodosModuleState) => state[fromCategories.FEATURE_KEY]
 );
 
 export const selectAllCategories = createSelector(
