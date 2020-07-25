@@ -1,7 +1,8 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: process.env.FIREBASE_API_KEY,
+    // apiKey: process.env.FIREBASE_API_KEY,
+    apiKey: 'xxx',
     authDomain: 'time-schedule-7b8e6.firebaseapp.com',
     databaseURL: 'https://time-schedule-7b8e6.firebaseio.com',
     projectId: 'time-schedule-7b8e6',

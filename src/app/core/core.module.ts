@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { FEATURE_KEY, reducer } from '@core/core-state/auth.reducers';
@@ -17,6 +18,7 @@ import { AuthEffects } from '@core/core-state/auth.effects';
     CommonModule,
     RouterModule,
     HttpClientModule,
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     StoreModule.forFeature(FEATURE_KEY, reducer),

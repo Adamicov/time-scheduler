@@ -38,7 +38,7 @@ export class AuthEffects {
       )
     ),
     map((response) => fromAuth.getUser),
-    catchError(error => of(fromAuth.authError({error}))
+    catchError((error) => of(fromAuth.authError({ error })))
   );
 
   @Effect()
@@ -59,8 +59,6 @@ export class AuthEffects {
 
   constructor(
     private actions$: Actions,
-    private afAuth: AngularFireAuth,
-    private snackbar: MatSnackBar,
-    private matBottomSheet: MatBottomSheet
+    private afAuth: AngularFireAuth
   ) {}
 }
